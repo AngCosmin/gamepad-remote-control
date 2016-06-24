@@ -1,0 +1,19 @@
+P:\CS\RemoteControl Forms\RemoteControl Forms\bin\Debug\RemoteControl Forms.exe.config
+P:\CS\RemoteControl Forms\RemoteControl Forms\obj\Debug\RemoteControl Forms.csprojResolveAssemblyReference.cache
+P:\CS\RemoteControl Forms\RemoteControl Forms\obj\Debug\RemoteControl_Forms.Form1.resources
+P:\CS\RemoteControl Forms\RemoteControl Forms\obj\Debug\RemoteControl_Forms.Properties.Resources.resources
+P:\CS\RemoteControl Forms\RemoteControl Forms\obj\Debug\RemoteControl Forms.csproj.GenerateResource.Cache
+P:\CS\RemoteControl Forms\RemoteControl Forms\bin\Debug\RemoteControl Forms.exe
+P:\CS\RemoteControl Forms\RemoteControl Forms\bin\Debug\RemoteControl Forms.pdb
+P:\CS\RemoteControl Forms\RemoteControl Forms\bin\Debug\EngineIoClientDotNet.dll
+P:\CS\RemoteControl Forms\RemoteControl Forms\bin\Debug\Newtonsoft.Json.dll
+P:\CS\RemoteControl Forms\RemoteControl Forms\bin\Debug\SocketIoClientDotNet.dll
+P:\CS\RemoteControl Forms\RemoteControl Forms\bin\Debug\WebSocket4Net.dll
+P:\CS\RemoteControl Forms\RemoteControl Forms\bin\Debug\Newtonsoft.Json.xml
+P:\CS\RemoteControl Forms\RemoteControl Forms\obj\Debug\RemoteControl Forms.exe
+P:\CS\RemoteControl Forms\RemoteControl Forms\obj\Debug\RemoteControl Forms.pdb
+P:\CS\RemoteControl Forms\RemoteControl Forms\bin\Debug\WindowsInput.dll
+P:\CS\RemoteControl Forms\RemoteControl Forms\bin\Debug\WindowsInput.xml
+P:\Projects\remote-control\C#\RemoteControl Forms\bin\Debug\RemoteControl Forms.exe.config
+P:\Projects\remote-control\C#\RemoteControl Forms\obj\Debug\RemoteControl Forms.exe
+P:\Projects\remote-control\C#\RemoteControl Forms\obj\Debug\RemoteControl Forms.pdb

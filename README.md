@@ -1,4 +1,4 @@
-# Gamepad Remote Control #
+# Gamepad remote control #
 
 ### How to use it? ###
 

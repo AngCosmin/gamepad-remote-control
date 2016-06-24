@@ -1,0 +1,286 @@
+body
+{
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    background-color: #F2f2f2;
+    font-family: Helvetica, Arial, sans-serif;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+#gamepad_button, #options
+{
+    display: none;
+}
+
+.gamepad
+{
+    
+    margin: 2% auto;
+    position: relative;
+    height: 85%;
+    width: 95%;			
+}
+
+#gamepad_joystick
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+#cerc
+{
+    height: 100%;
+    width: 43%;
+    background-color: #bdc3c7;
+    border-radius: 50%;
+    border-bottom: 10px solid #95a5a6;
+}
+
+.stanga
+{
+    float: left;
+}
+
+.dreapta
+{
+    float: right;
+}
+
+.white_circle_joystick
+{
+    position: relative;
+    vertical-align: middle;
+    height: 80%;
+    width: 80%;
+    border-radius: 50%;
+    background-color: #ecf0f1;
+    margin: 10% auto;
+}
+
+.white_circle
+{
+    position: relative;
+    /*
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    */
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    background-color: #ecf0f1;
+}
+
+#gamepad_directions
+{
+    position: relative;
+    /*
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    */
+    height: 100%;
+    width: 100%;   
+}
+
+#up
+{
+    top: 27%;
+    left: 50%;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+}
+
+#left
+{
+    float: left;
+    top: 25%;
+    left: 27%;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+}
+
+#none
+{
+    float: left;
+    top: 25%;
+    left: 25%;
+}
+
+#right
+{
+    float: left;
+    top: 25%;
+    left: 23%;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
+
+#down
+{
+    top: 48%;
+    left: 50%;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+}
+
+.buttons
+{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 80%;
+    width: 80%;
+}
+
+#gamepad_buttons, #gamepad_buttons_options
+{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100%;
+    width: 100%;
+}
+
+.button
+{
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    transform: translate(-50%, -50%);
+    position: relative;
+    width: 25%;
+    height: 25%;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+}
+
+#blue, #blue_opt
+{
+    top: 25%;
+    left: 50%;
+    background-color: #2980b9;
+}
+
+#green, #green_opt
+{
+    float: left;
+    top: 25%;
+    left: 25%;
+    background-color: #27ae60;
+}
+
+#red, #red_opt
+{
+    top: 25%;
+    left: 75%;
+    background-color: #c0392b;
+}
+
+#orange, #orange_opt
+{
+    position: relative;
+    top: 25%;
+    left: 50%;
+    background-color: #f39c12;
+}
+
+.pressed
+{
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+}
+
+/* MIDDLE PART OF GAMEPAD */
+.middle
+{
+    margin: 0 auto;
+    background-color: #bdc3c7;
+    width: 60%;
+    height: 80%;
+    border-bottom: 10px solid #95a5a6;
+}
+
+.middle_area
+{
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 50%;
+    width: 40%;
+}
+/* ==================== */
+
+/* OPTIONS */
+select, select option
+{
+    text-align-last:center;
+    width: 130px;
+}
+
+/* OTHERS */
+.nav_button
+{
+    background-color: #2980b9;
+    color: #FFF;
+    font-weight: bold;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.text
+{
+    font-size: 0.8em;
+    color: #2980b9;
+}
+
+#dx, #dy
+{
+    height: 10px;
+    width: 80px;
+}
+
+#gamepad_mode_select
+{
+    width: 120px;
+}
+
+#player_select
+{
+    width: 70px;
+}
+
+.isHidden
+{
+    display: none;
+}
+
+.options_container
+{
+    display: none;
+    width: 90%;
+    height: 90%;
+    margin: 3% auto;
+}
+
+.options_container > table
+{
+    width: 100%;
+    text-align: center; 
+}
+
+.table_head
+{
+    color: #2980b9;
+    font-weight: bold;
+    font-size: 1.2em;
+    border-bottom: 1px solid #2980b9;
+}

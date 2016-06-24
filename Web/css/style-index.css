@@ -1,0 +1,39 @@
+body
+{
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+    background-color: #F2f2f2;
+    font-family: Helvetica, Arial, sans-serif;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+	font-weight: bold;
+	color: #FFF;
+}
+
+.content
+{
+	text-align: center;
+}
+
+img
+{
+	margin: 15px auto;
+	width: 25%;
+	height: 35%;
+}
+
+.button
+{
+	background-color: #2980b9;
+	padding-top: 15px;
+	width: 180px;
+	height: 30px;
+	border-radius: 10%;
+	margin: 15px auto;
+}
+
+.button:hover
+{
+	color: #FFF;
+}

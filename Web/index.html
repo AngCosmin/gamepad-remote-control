@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Remote control</title>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="mobile-web-app-capable" content="yes"> <!-- REQUEST FULLSCREEN -->
+		
+		<link rel="stylesheet" href="css/font-awesome.min.css"> <!-- FONT AWESOME -->
+		<link rel="stylesheet" href="css/style-index.css"> <!-- STYLE -->	
+		<link rel="stylesheet" href="css/animate.css">
+	</head>
+	<body>
+		<div class="sixteen-nine">
+			<div class="content">
+				<img class="animated bounceIn" src="img/logo.png">
+				<div id="gamepad" class="button animated bounceIn" onclick="goTo(this)">GAMEPAD</div>
+				<div id="commands" class="button animated bounceIn" onclick="goTo(this)">COMMANDS</div>
+			</div>
+		</div>
+	</body>
+
+	<script src="js/jquery.min.js"></script> <!-- JQUERY -->
+	<script>
+		function goTo(div)
+		{
+			console.log(div);
+			switch(div.id)
+			{
+				case "gamepad":
+					window.location.href = "gamepad.html";
+					break;
+				case "commands":
+					window.location.href = "commands.html";
+					break;
+			}
+		}
+	</script>
+</html>

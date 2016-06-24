@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Remote control / Commands</title>
+
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="mobile-web-app-capable" content="yes"> <!-- REQUEST FULLSCREEN -->
+		
+		<link rel="stylesheet" href="css/font-awesome.min.css"> <!-- FONT AWESOME -->
+		<link rel="stylesheet" href="css/style-index.css"> <!-- STYLE -->	
+		<link rel="stylesheet" href="css/animate.css">
+	</head>
+	<body>
+		<div class="sixteen-nine">
+			<div class="content">
+				<div id="shutdown" class="button animated bounceIn">SHUTDOWN</div>
+				<div id="restart" class="button animated bounceIn">RESTART</div>
+				<div id="volup" class="button animated bounceIn">VOLUME UP</div>
+				<div id="voldown" class="button animated bounceIn">VOLUME DOWN</div>
+				<div id="mute" class="button animated bounceIn">MUTE</div>
+			</div>
+		</div>
+	</body>
+
+	<script src="/socket.io/socket.io.js"></script> <!-- SOCKETS.IO -->
+	<script src="js/jquery.min.js"></script> <!-- JQUERY -->
+	<script src="js/platform.js"></script> <!-- PLATFORM -->
+    <script src="js/polymer.js"></script> <!-- POLIMER -->
+    <script src="js/midi.js"></script> <!-- MIDI -->
+	<script src="js/button_hold.js"></script>
+</html>

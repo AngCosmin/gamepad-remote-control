@@ -1,0 +1,430 @@
+<html>
+	<head>
+		<title>Remote control</title>
+	
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="mobile-web-app-capable" content="yes">
+		
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/animate.css">
+	</head>
+	<body>
+		<!-- TOP -->
+		<span class="nav_button" id="options_button">OPTIONS</span>
+		<span class="nav_button" id="gamepad_button">GAMEPAD</span>
+
+		<select id="player_select">
+			<option value="null"></option>
+			<option value="p1">Player 1</option>
+			<option value="p2">Player 2</option>
+		</select>
+
+
+		
+		<!-- GAMEPAD -->
+		<div class="gamepad animated fadeIn">
+			<div class="stanga" id="cerc">
+				<div class="white_circle_joystick">
+					<div id="gamepad_joystick"></div>
+				</div>
+			</div>
+			<div class="dreapta" id="cerc">
+				<div class="buttons">
+					<div class="white_circle">
+						<div class="animated fadeIn" id="gamepad_buttons">
+							<div class="button" id="blue"></div>
+							<div class="button" id="green"></div>
+							<div class="button" id="red"></div>
+							<div class="button" id="orange"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="middle">
+				<div class="middle_area">
+				</div>
+			</div>
+		</div>
+
+		<div class="options_container">
+			<table>
+				<tr>
+					<td class="table_head">Options</td>
+					<td class="table_head">Player 1</td>
+					<td class="table_head">Player 2</td>
+				</tr>
+				<tr>
+					<td><span class="text">Type</span></td>
+					<td>
+						<select id="select_gamepad_type_p1">
+							<option value="joystick">Joystick</option>
+							<option value="mouse">Mouse</option>
+						</select>
+					</td>
+					<td>
+						<select id="select_gamepad_type_p2">
+							<option value="joystick">Joystick</option>
+							<option value="mouse">Mouse</option>
+						</select>
+					</td>
+				<tr>
+					<td><span class="text">Direction <i class="fa fa-arrow-up" aria-hidden="true"></i></span></td>
+					<td>
+						<select id="p1_up"></select>
+					</td>
+					<td>
+						<select id="p2_up"></select>
+					</td>
+				</tr>
+				<tr>
+					<td><span class="text">Direction <i class="fa fa-arrow-down" aria-hidden="true"></i></span></td>
+					<td>
+						<select id="p1_down"></select>
+					</td>
+					<td>
+						<select id="p2_down"></select>
+					</td>
+				</tr>
+				<tr>
+					<td><span class="text">Direction <i class="fa fa-arrow-left" aria-hidden="true"></i></span></td>
+					<td>
+						<select id="p1_left"></select>
+					</td>
+					<td>
+						<select id="p2_left"></select>
+					</td>
+				</tr>
+				<tr>
+					<td><span class="text">Direction <i class="fa fa-arrow-right" aria-hidden="true"></i></span></td>
+					<td>
+						<select id="p1_right"></select>
+					</td>
+					<td>
+						<select id="p2_right"></select>
+					</td>
+				</tr>
+				<tr>
+					<td><span class="text">Button <i class="fa fa-circle" aria-hidden="true" style="color: #2980b9"></i></span></td>
+					<td>
+						<select id="p1_blue"></select>
+					</td>
+					<td>
+						<select id="p2_blue"></select>
+					</td>
+				</tr>
+				<tr>
+					<td><span class="text">Button <i class="fa fa-circle" aria-hidden="true" style="color: #27ae60"></i></span></td>
+					<td>
+						<select id="p1_green"></select>
+					</td>
+					<td>
+						<select id="p2_green"></select>
+					</td>
+				</tr>
+				<tr>
+					<td><span class="text">Button <i class="fa fa-circle" aria-hidden="true" style="color: #c0392b"></i></span></td>
+					<td>
+						<select id="p1_red"></select>
+					</td>
+					<td>
+						<select id="p2_red"></select>
+					</td>
+				</tr>
+				<tr>
+					<td><span class="text">Button <i class="fa fa-circle" aria-hidden="true" style="color: #f39c12"></i></span></td>
+					<td>
+						<select id="p1_orange"></select>
+					</td>
+					<td>
+						<select id="p2_orange"></select>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+	
+	<script src="/socket.io/socket.io.js"></script> <!-- SOCKETS.IO -->
+	<script src="js/jquery.min.js"></script> <!-- JQUERY -->
+	<script src="js/js.cookie.js"></script> <!-- JQUERY COOKIES -->
+	<script src="js/platform.js"></script> <!-- PLATFORM -->
+    <script src="js/polymer.js"></script> <!-- POLIMER -->
+    <script src="js/midi.js"></script> <!-- MIDI -->
+    <script src="js/joystickgamepad.js"></script> <!-- JOYSTICK -->
+	<script src="js/player.js"></script>
+	<script>
+		$(document).ready(function(){
+			selected_player = -1;
+
+			joystick = new VirtualJoystick({
+				container: document.getElementById('gamepad_joystick'),
+				mouseSupport: true,
+				limitStickTravel: true,
+				stickRadius: 50,
+				baseX: ($("body").width() - $(".gamepad").width()) / 2 + $(".stanga").width() / 2,
+				baseY: ($("body").height() - $(".gamepad").height()) / 2 + $(".stanga").height() / 2,
+				strokeStyle: '#7f8c8d',
+				stickRadius: 50
+			});
+		});
+
+		$("#options_button").on("click", function(){
+			setSelectDropDownKeys();
+			setSelectTagValues();
+			$(".options_container").show();
+			$("#options_button").hide();
+			$("#gamepad_button").show();
+			$(".gamepad").hide();
+			$("#gamepad_joystick").hide();
+			$("#player_select").hide();
+		});
+
+		$("#gamepad_button").on("click", function(){
+			$(".options_container").hide();
+			$("#options_button").show();
+			$("#gamepad_button").hide();
+			$(".gamepad").show();
+			$("#gamepad_joystick").show();
+			$("#player_select").show();
+		});
+
+		$("#player_select").on("change", function(){
+			switch($("#player_select").val())
+			{
+				case "null":
+					gamepad_mode = -1;
+					selected_player = -1;
+					break
+				case "p1":
+					gamepad_mode = Cookies.get("select_gamepad_type_p1");
+					selected_player = 1;
+					break;
+				case "p2":
+					gamepad_mode = Cookies.get("select_gamepad_type_p2");
+					selected_player = 2;
+					break;
+			}
+		});
+
+		$("#select_gamepad_type_p1").on("change", function(){
+			socket.emit("optionChange", {id: this.id, value: $("#" + this.id).val()});
+		});
+
+		$("#select_gamepad_type_p2").on("change", function(){
+			socket.emit("optionChange", {id: this.id, value: $("#" + this.id).val()});
+		});
+
+		$("#p1_up").on("change", function(){
+			socket.emit("optionChange", {id: this.id, value: $("#" + this.id).val()});
+		});
+
+		$("#p2_up").on("change", function(){
+			socket.emit("optionChange", {id: this.id, value: $("#" + this.id).val()});
+		});
+
+		$("#p1_down").on("change", function(){
+			socket.emit("optionChange", {id: this.id, value: $("#" + this.id).val()});
+		});
+
+		$("#p2_down").on("change", function(){
+			socket.emit("optionChange", {id: this.id, value: $("#" + this.id).val()});
+		});
+
+		$("#p1_left").on("change", function(){
+			socket.emit("optionChange", {id: this.id, value: $("#" + this.id).val()});
+		});
+
+		$("#p2_left").on("change", function(){
+			socket.emit("optionChange", {id: this.id, value: $("#" + this.id).val()});
+		});
+
+		$("#p1_right").on("change", function(){
+			socket.emit("optionChange", {id: this.id, value: $("#" + this.id).val()});
+		});
+
+		$("#p2_right").on("change", function(){
+			socket.emit("optionChange", {id: this.id, value: $("#" + this.id).val()});
+		});
+
+		$("#p1_blue").on("change", function(){
+			socket.emit("optionChange", {id: this.id, value: $("#" + this.id).val()});
+		});
+
+		$("#p2_blue").on("change", function(){
+			socket.emit("optionChange", {id: this.id, value: $("#" + this.id).val()});
+		});
+
+		$("#p1_green").on("change", function(){
+			socket.emit("optionChange", {id: this.id, value: $("#" + this.id).val()});
+		});
+
+		$("#p2_green").on("change", function(){
+			socket.emit("optionChange", {id: this.id, value: $("#" + this.id).val()});
+		});
+
+		$("#p1_red").on("change", function(){
+			socket.emit("optionChange", {id: this.id, value: $("#" + this.id).val()});
+		});
+
+		$("#p2_red").on("change", function(){
+			socket.emit("optionChange", {id: this.id, value: $("#" + this.id).val()});
+		});
+
+		$("#p1_orange").on("change", function(){
+			socket.emit("optionChange", {id: this.id, value: $("#" + this.id).val()});
+		});
+
+		$("#p2_orange").on("change", function(){
+			socket.emit("optionChange", {id: this.id, value: $("#" + this.id).val()});
+		});
+
+		socket.on("optionChange", function(data){
+			var _player = (data.id).substring(0,2);
+			var _button = (data.id).substring(3,20);
+
+			setButtonToValue(_player, _button, data.value);
+			Cookies.set(data.id, data.value);
+			$("#" + data.id).val(data.value);
+		});
+
+		function setButtonToValue(_player, _button, value)
+		{
+			if(_player == "p1")
+			{
+				switch(_button)
+				{
+					case "up":
+						player1["up"] = value;
+						break;
+					case "down":
+						player1["down"] = value;
+						break;
+					case "left":
+						player1["left"] = value;
+						break;
+					case "right":
+						player1["right"] = value;
+						break;
+					case "blue":
+						player1["blue"] = value;
+						break;
+					case "green":
+						player1["green"] = value;
+						break;
+					case "red":
+						player1["red"] = value;
+						break;
+					case "orange":
+						player1["orange"] = value;
+						break;
+				}
+			}
+			else if(_player == "p2")
+			{
+				switch(_button)
+				{
+					case "up":
+						player2["up"] = value;
+						break;
+					case "down":
+						player2["down"] = value;
+						break;
+					case "left":
+						player2["left"] = value;
+						break;
+					case "right":
+						player2["right"] = value;
+						break;
+					case "blue":
+						player2["blue"] = value;
+						break;
+					case "green":
+						player2["green"] = value;
+						break;
+					case "red":
+						player2["red"] = value;
+						break;
+					case "orange":
+						player2["orange"] = value;
+						break;
+				}
+			}
+		}
+
+		// When switching to options set the <select> to the value from player controls
+		function setSelectTagValues()
+		{
+			$("#p1_up").val(player1["up"]);
+			$("#p1_down").val(player1["down"]);
+			$("#p1_left").val(player1["left"]);
+			$("#p1_right").val(player1["right"]);
+			$("#p1_blue").val(player1["blue"]);
+			$("#p1_green").val(player1["green"]);
+			$("#p1_red").val(player1["red"]);
+			$("#p1_orange").val(player1["orange"]);
+			$("#select_gamepad_type_p1").val(Cookies.get("select_gamepad_type_p1"));
+
+			$("#p2_up").val(player2["up"]);
+			$("#p2_down").val(player2["down"]);
+			$("#p2_left").val(player2["left"]);
+			$("#p2_right").val(player2["right"]);
+			$("#p2_blue").val(player2["blue"]);
+			$("#p2_green").val(player2["green"]);
+			$("#p2_red").val(player2["red"]);
+			$("#p2_orange").val(player2["orange"]);
+			$("#select_gamepad_type_p2").val(Cookies.get("select_gamepad_type_p2"));
+		}
+
+		function setSelectDropDownKeys()
+		{
+			var s = '<option value="0x26">Arrow up</option><option value="0x28">Arrow down</option>\
+						<option value="0x25">Arrow left</option><option value="0x27">Arrow right</option>\
+						<option value="mouseleft">Mouse left</option><option value="mouseright">Mouse right</option>\
+						<option value="mousemiddle">Mouse middle</option><option value="0x20">SPACE</option>\
+						<option value="0x0D">ENTER</option><option value="0x10">SHIFT</option>\
+						<option value="0x09">TAB</option><option value="0x30">0 Key</option>\
+						<option value="0x31">1 Key</option><option value="0x32">2 Key</option>\
+						<option value="0x33">3 Key</option><option value="0x34">4 Key</option>\
+						<option value="0x35">5 Key</option><option value="0x36">6 Key</option>\
+						<option value="0x37">7 Key</option><option value="0x38">8 Key</option>\
+						<option value="0x39">9 Key</option><option value="0x41">A Key</option>\
+						<option value="0x42">B Key</option><option value="0x43">C Key</option>\
+						<option value="0x44">D Key</option><option value="0x45">E Key</option>\
+						<option value="0x46">F Key</option><option value="0x47">G Key</option>\
+						<option value="0x48">H Key</option><option value="0x49">I Key</option>\
+						<option value="0x4A">J Key</option><option value="0x4B">K Key</option>\
+						<option value="0x4C">L Key</option><option value="0x4D">M Key</option>\
+						<option value="0x4E">N Key</option><option value="0x4F">O Key</option>\
+						<option value="0x50">P Key</option><option value="0x51">Q Key</option>\
+						<option value="0x52">R Key</option><option value="0x53">S Key</option>\
+						<option value="0x54">T Key</option><option value="0x55">U Key</option>\
+						<option value="0x56">V Key</option><option value="0x57">W Key</option>\
+						<option value="0x58">X Key</option><option value="0x59">Y Key</option>\
+						<option value="0x5A">Z Key</option><option value="0x60">0 Num Key</option>\
+						<option value="0x61">1 Num Key</option><option value="0x62">2 Num Key</option>\
+						<option value="0x63">3 Num Key</option><option value="0x64">4 Num Key</option>\
+						<option value="0x65">5 Num Key</option><option value="0x66">6 Num Key</option>\
+						<option value="0x67">7 Num Key</option><option value="0x68">8 Num Key</option>\
+						<option value="0x69">9 Num Key</option>';
+
+			$("#p1_up").html(s);
+			$("#p1_down").html(s);
+			$("#p1_left").html(s);
+			$("#p1_right").html(s);
+			$("#p1_blue").html(s);
+			$("#p1_green").html(s);
+			$("#p1_red").html(s);
+			$("#p1_orange").html(s);
+
+			$("#p2_up").html(s);
+			$("#p2_down").html(s);
+			$("#p2_left").html(s);
+			$("#p2_right").html(s);
+			$("#p2_blue").html(s);
+			$("#p2_green").html(s);
+			$("#p2_red").html(s);
+			$("#p2_orange").html(s);
+		}
+	</script>
+</html>

@@ -4,6 +4,8 @@
 
 * Download
 * Install **node.js**
+* Navigate to: ./Web
+* Shift + right click and choose open command window here
 * Install express: **npm install --save express**
 * Install sockets.io: **npm install --save socket.io**
 * Run: **run_server_win.bat**
